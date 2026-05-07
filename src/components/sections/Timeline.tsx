@@ -49,7 +49,7 @@ export const Timeline = () => {
   const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   return (
-    <section id="timeline" className="py-32 relative bg-transparent z-20">
+    <section id="timeline" className="py-24 md:py-32 relative bg-transparent z-20 snap-start">
       <div className="max-w-5xl mx-auto px-6 relative z-10">
         <div className="mb-24 text-center">
           <motion.div
@@ -107,26 +107,26 @@ export const Timeline = () => {
                 {/* Content Card */}
                 <motion.div
                   whileHover={{ scale: 1.02 }}
-                  className={`md:w-[45%] w-full glass-ultra p-8 rounded-3xl transition-all duration-500 relative mt-4 md:mt-0
+                  className={`md:w-[45%] w-full glass-ultra p-6 md:p-8 rounded-3xl transition-all duration-500 relative mt-4 md:mt-0
                     ${item.color === 'orange' ? 'shadow-[0_0_20px_rgba(255,107,53,0.2)] hover:border-accent-orange/50 hover:shadow-none hover:bg-black/60 hover:backdrop-blur-[60px]' : ''}
                     ${item.color === 'sky' ? 'shadow-[0_0_20px_rgba(14,165,233,0.2)] hover:border-accent-sky/50 hover:shadow-none hover:bg-black/60 hover:backdrop-blur-[60px]' : ''}
                     ${item.color === 'peach' ? 'shadow-[0_0_20px_rgba(247,197,159,0.1)] hover:border-accent-peach/50 hover:shadow-none hover:bg-black/60 hover:backdrop-blur-[60px]' : ''}
                   `}
                 >
-                  <span className={`font-bold tracking-[0.2em] uppercase mb-3 block text-xs
+                  <span className={`font-bold tracking-[0.2em] uppercase mb-2 md:mb-3 block text-[10px] md:text-xs
                     ${item.color === 'orange' ? 'text-accent-orange' : ''}
                     ${item.color === 'sky' ? 'text-accent-sky' : ''}
                     ${item.color === 'peach' ? 'text-accent-peach' : ''}
                   `}>
                     {item.year}
                   </span>
-                  <h3 className={`text-2xl font-bold mb-2 tracking-widest transition-colors duration-300
+                  <h3 className={`text-xl md:text-2xl font-bold mb-2 tracking-widest transition-colors duration-300
                     ${item.color === 'orange' ? 'group-hover:text-accent-orange text-white' : ''}
                     ${item.color === 'sky' ? 'group-hover:text-accent-sky text-white' : ''}
                     ${item.color === 'peach' ? 'group-hover:text-accent-peach text-white' : ''}
                   `}>{item.title}</h3>
-                  <h4 className="text-white/50 text-sm font-medium mb-6 uppercase tracking-wider">{item.company}</h4>
-                  <p className="text-white/70 text-sm leading-relaxed group-hover:text-white/90 transition-colors duration-300">
+                  <h4 className="text-white/50 text-[10px] md:text-sm font-medium mb-4 md:mb-6 uppercase tracking-wider">{item.company}</h4>
+                  <p className="text-white/70 text-xs md:text-sm leading-relaxed group-hover:text-white/90 transition-colors duration-300">
                     {item.description}
                   </p>
                 </motion.div>

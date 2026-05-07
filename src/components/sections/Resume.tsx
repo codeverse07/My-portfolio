@@ -5,32 +5,32 @@ import { FileText, Download, Eye, Scan } from "lucide-react";
 
 export const Resume = () => {
   return (
-    <section id="resume" className="py-32 relative bg-transparent z-20">
+    <section id="resume" className="py-24 md:py-32 relative bg-transparent z-20 snap-start">
       <div className="max-w-4xl mx-auto px-6 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="glass-ultra rounded-[3rem] p-8 md:p-16 relative overflow-hidden text-center group border border-accent-orange/20 transition-all duration-500 shadow-[0_0_30px_rgba(255,107,53,0.15)] hover:shadow-none hover:bg-black/60 hover:backdrop-blur-[60px]"
-        >
-          {/* Cyber Scanning effect on hover */}
-          <div className="absolute left-0 top-0 w-full h-[2px] bg-accent-orange shadow-[0_0_15px_rgba(255,107,53,0.8)] opacity-0 group-hover:opacity-100 group-hover:animate-scan z-0 pointer-events-none" />
-          
-          <div className="relative z-10 flex flex-col items-center">
-            <div className="relative">
-              <div className="w-24 h-24 rounded-2xl bg-white/5 flex items-center justify-center mb-8 rotate-3 shadow-[0_0_15px_rgba(255,107,53,0.3)] border border-accent-orange/30 group-hover:scale-110 transition-transform duration-500">
-                <FileText className="w-12 h-12 text-accent-orange" />
-              </div>
-              <Scan className="absolute -top-4 -right-4 w-8 h-8 text-accent-sky opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            </div>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="glass-ultra rounded-[2rem] md:rounded-[3rem] p-8 md:p-16 relative overflow-hidden text-center group border border-accent-orange/20 transition-all duration-500 shadow-[0_0_30px_rgba(255,107,53,0.15)] hover:shadow-none hover:bg-black/60 hover:backdrop-blur-[60px]"
+          >
+            {/* Cyber Scanning effect on hover */}
+            <div className="absolute left-0 top-0 w-full h-[2px] bg-accent-orange shadow-[0_0_15px_rgba(255,107,53,0.8)] opacity-0 group-hover:opacity-100 group-hover:animate-scan z-0 pointer-events-none" />
             
-            <h2 className="text-4xl md:text-5xl font-black mb-4 tracking-tighter uppercase text-white">
-              Extract <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-orange to-accent-sky">Data File</span>
-            </h2>
-            <p className="text-white/60 mb-10 max-w-lg mx-auto text-lg leading-relaxed font-mono group-hover:text-white/90 transition-colors duration-300">
-              Initialize download sequence to retrieve complete technical specifications, work history, and architecture logs.
-            </p>
+            <div className="relative z-10 flex flex-col items-center">
+              <div className="relative">
+                <div className="w-20 h-20 md:w-24 md:h-24 rounded-2xl bg-white/5 flex items-center justify-center mb-6 md:mb-8 rotate-3 shadow-[0_0_15px_rgba(255,107,53,0.3)] border border-accent-orange/30 group-hover:scale-110 transition-transform duration-500">
+                  <FileText className="w-10 h-10 md:w-12 md:h-12 text-accent-orange" />
+                </div>
+                <Scan className="absolute -top-4 -right-4 w-8 h-8 text-accent-sky opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              </div>
+              
+              <h2 className="text-3xl md:text-5xl font-black mb-4 tracking-tighter uppercase text-white">
+                Extract <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-orange to-accent-sky">Data File</span>
+              </h2>
+              <p className="text-white/60 mb-8 md:mb-10 max-w-lg mx-auto text-base md:text-lg leading-relaxed font-mono group-hover:text-white/90 transition-colors duration-300">
+                Initialize download sequence to retrieve complete technical specifications, work history, and architecture logs.
+              </p>
 
             <div className="flex flex-col sm:flex-row gap-6 w-full sm:w-auto">
               <a 

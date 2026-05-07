@@ -17,7 +17,7 @@ import { Footer } from "@/components/sections/Footer";
 import { Navbar } from "@/ui/Navbar";
 
 const MistyBackground = () => (
-  <div className="misty-background">
+  <div className="misty-background fixed inset-0 overflow-hidden pointer-events-none">
     <motion.div 
       animate={{ 
         x: [0, 50, 0], 
@@ -25,7 +25,7 @@ const MistyBackground = () => (
         scale: [1, 1.1, 1] 
       }}
       transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-      className="misty-blob blob-orange" 
+      className="misty-blob blob-orange opacity-30 md:opacity-50" 
     />
     <motion.div 
       animate={{ 
@@ -34,7 +34,7 @@ const MistyBackground = () => (
         scale: [1, 1.2, 1] 
       }}
       transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-      className="misty-blob blob-blue" 
+      className="misty-blob blob-blue opacity-30 md:opacity-50" 
     />
     <motion.div 
       animate={{ 
@@ -43,7 +43,7 @@ const MistyBackground = () => (
         scale: [1, 1.1, 1] 
       }}
       transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
-      className="misty-blob blob-red" 
+      className="misty-blob blob-red opacity-30 md:opacity-50" 
     />
   </div>
 );

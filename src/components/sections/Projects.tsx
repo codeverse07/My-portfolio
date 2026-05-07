@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from "framer-motion";
-import { ExternalLink, Code2, Cpu } from "lucide-react";
+import { ExternalLink, Code2, Cpu, LayoutGrid, Layers, Star } from "lucide-react";
 import React, { useRef, useState, useEffect } from "react";
 
 const PROJECTS = [
@@ -85,14 +85,16 @@ const ProjectCard = ({ project, idx }: { project: typeof PROJECTS[0], idx: numbe
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       className={`relative glass-ultra rounded-3xl p-6 h-full flex flex-col transition-all duration-500 group
-        ${isEven ? 'shadow-[0_0_20px_rgba(205,255,0,0.2)] hover:shadow-[0_0_30px_rgba(205,255,0,0.3)]' : 'shadow-[0_0_20px_rgba(255,127,80,0.2)] hover:shadow-[0_0_30px_rgba(255,127,80,0.3)]'}
+        ${isEven 
+          ? 'shadow-[0_0_20px_rgba(205,255,0,0.2)] border-neon-lime/30 md:border-white/10 md:shadow-none md:hover:shadow-[0_0_30px_rgba(205,255,0,0.3)] md:hover:border-neon-lime/50' 
+          : 'shadow-[0_0_20px_rgba(255,127,80,0.2)] border-coral/30 md:border-white/10 md:shadow-none md:hover:shadow-[0_0_30px_rgba(255,127,80,0.3)] md:hover:border-coral/50'}
       `}
     >
       <div 
         style={{ transform: "translateZ(50px)" }} 
         className="w-full aspect-[16/9] rounded-2xl bg-white/5 mb-6 overflow-hidden relative flex items-center justify-center border border-white/10 group-hover:border-white/20 transition-all duration-500 backdrop-blur-sm"
       >
-        <div className={`absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-10 transition-opacity duration-500 mix-blend-screen z-10
+        <div className={`absolute inset-0 bg-gradient-to-br opacity-20 md:opacity-0 md:group-hover:opacity-20 transition-opacity duration-500 mix-blend-screen z-10
           ${isEven ? 'from-neon-lime to-transparent' : 'from-coral to-transparent'}
         `} />
         
@@ -125,18 +127,22 @@ const ProjectCard = ({ project, idx }: { project: typeof PROJECTS[0], idx: numbe
           href={project.live} 
           target="_blank" 
           rel="noopener noreferrer"
-          className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-xl font-bold uppercase tracking-widest text-xs transition-all duration-300 border
-          ${isEven ? 'bg-neon-lime/10 text-neon-lime border-neon-lime hover:bg-neon-lime hover:text-black' : 'bg-coral/10 text-coral border-coral hover:bg-coral hover:text-black'}
-        `}>
-          <ExternalLink size={16} /> Deploy
+          style={{ 
+            backgroundColor: isEven ? '#CDFF00' : '#FF7F50', 
+            color: '#000000' 
+          }}
+          className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-xl font-black uppercase tracking-widest text-[10px] transition-all duration-300 shadow-lg`}
+        >
+          <ExternalLink size={14} color="#000000" /> 
+          <span style={{ color: '#000000', fontWeight: 900 }}>Deploy</span>
         </a>
         <a 
           href={project.github} 
           target="_blank" 
           rel="noopener noreferrer"
-          className="flex items-center justify-center w-12 h-12 rounded-xl glass-ultra border border-white/10 hover:border-white transition-colors"
+          className="flex items-center justify-center w-12 h-12 rounded-xl glass-ultra border border-white/20 md:border-white/10 md:hover:border-white transition-colors shadow-lg"
         >
-          <Code2 size={20} className="text-white" />
+          <Code2 size={18} className="text-white" />
         </a>
       </div>
     </motion.div>
@@ -155,61 +161,72 @@ export const Projects = () => {
     return () => clearInterval(timer);
   }, [isAllView]);
 
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   return (
-    <section id="projects" className="py-32 relative bg-transparent z-20">
+    <section id="projects" className="py-24 md:py-32 relative bg-transparent z-20 overflow-hidden snap-start">
       <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <div className="mb-24 flex flex-col md:flex-row md:items-end justify-between gap-8">
-          <div>
+        
+        <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
+          <div className="max-w-2xl">
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              className="inline-block glass-ultra px-6 py-2 rounded-full mb-6 text-white text-sm font-semibold tracking-[0.2em] uppercase border-neon-lime shadow-[0_0_15px_rgba(205,255,0,0.3)]"
+              className="inline-block glass-ultra px-6 py-2 rounded-full mb-6 text-white text-xs font-bold tracking-[0.3em] uppercase border-accent-sky shadow-[0_0_15px_rgba(14,165,233,0.3)]"
             >
-              Execution Logs
+              Execution_Logs
             </motion.div>
             <motion.h2
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-5xl md:text-7xl font-black mb-6 tracking-tighter text-white"
+              className="text-white text-5xl md:text-7xl font-black mb-6 tracking-tighter uppercase"
             >
-              FEATURED <span className="text-neon-lime">SYSTEMS</span>
+              Selected <span className="text-accent-sky">Projects.</span>
             </motion.h2>
-            <motion.div 
-              initial={{ width: 0 }}
-              whileInView={{ width: "100px" }}
+            <motion.p 
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 1, delay: 0.2 }}
-              className="h-[2px] bg-neon-lime rounded-full shadow-[0_0_10px_rgba(205,255,0,0.8)]" 
-            />
+              transition={{ delay: 0.2 }}
+              className="text-white/50 text-xl leading-relaxed font-medium"
+            >
+              Architecting high-performance digital experiences with cutting-edge tech.
+            </motion.p>
           </div>
 
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+          <button 
             onClick={() => setIsAllView(!isAllView)}
-            className="group relative px-8 py-3 rounded-full font-black text-xs uppercase tracking-[0.3em] overflow-hidden transition-all duration-300 border border-white/20 hover:border-neon-lime"
+            className="group px-8 py-4 glass-ultra rounded-2xl flex items-center gap-3 text-white font-bold tracking-widest uppercase text-xs hover:border-accent-sky transition-all duration-500 shadow-xl"
           >
-            <span className="relative z-10 flex items-center gap-2">
-              {isAllView ? 'Collapse Stack' : 'View All Systems'}
-            </span>
-            <div className="absolute inset-0 bg-neon-lime opacity-0 group-hover:opacity-10 transition-opacity" />
-          </motion.button>
+            {isAllView ? (
+              <><Layers className="group-hover:rotate-180 transition-transform duration-500" size={16} /> Stack View</>
+            ) : (
+              <><LayoutGrid className="group-hover:scale-110 transition-transform duration-500" size={16} /> All Systems</>
+            )}
+          </button>
         </div>
 
         <motion.div 
           layout
-          className={isAllView 
-            ? "grid md:grid-cols-2 lg:grid-cols-2 gap-8 md:gap-12" 
-            : "relative h-[650px] md:h-[600px] flex items-center justify-center w-full"
+          className={isAllView || isMobile
+            ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 md:gap-12" 
+            : "relative md:h-[600px] flex items-center justify-center w-full"
           }
         >
-          <AnimatePresence initial={false}>
+          <AnimatePresence mode="popLayout">
             {PROJECTS.map((project, idx) => {
-              // Carousel Logic (only used when not in All View)
               const offset = (idx - currentIndex + PROJECTS.length) % PROJECTS.length;
-              let carouselX = 0;
+              
+              let carouselX: string | number = 0;
               let carouselScale = 1;
               let carouselOpacity = 1;
               let carouselZIndex = 50;
@@ -220,18 +237,18 @@ export const Projects = () => {
                 carouselOpacity = 1;
                 carouselZIndex = 50;
               } else if (offset === 1) {
-                carouselX = 400;
-                carouselScale = 0.9;
-                carouselOpacity = 0.4;
+                carouselX = "100%";
+                carouselScale = 0.8;
+                carouselOpacity = 0;
                 carouselZIndex = 40;
               } else if (offset === PROJECTS.length - 1) {
-                carouselX = -400;
-                carouselScale = 0.9;
+                carouselX = "-100%";
+                carouselScale = 0.8;
                 carouselOpacity = 0;
                 carouselZIndex = 60;
               } else {
-                carouselX = 800;
-                carouselScale = 0.8;
+                carouselX = "200%";
+                carouselScale = 0.7;
                 carouselOpacity = 0;
                 carouselZIndex = 10;
               }
@@ -241,28 +258,33 @@ export const Projects = () => {
                   key={project.title}
                   layout
                   initial={{ opacity: 0, y: 20 }}
-                  animate={{
-                    x: isAllView ? 0 : carouselX,
+                  animate={isAllView || isMobile ? {
+                    x: 0,
                     y: 0,
-                    scale: isAllView ? 1 : carouselScale,
-                    opacity: isAllView ? 1 : carouselOpacity,
-                    zIndex: isAllView ? 1 : carouselZIndex,
+                    scale: 1,
+                    opacity: 1,
+                    zIndex: 1,
+                  } : {
+                    x: carouselX,
+                    scale: carouselScale,
+                    opacity: carouselOpacity,
+                    zIndex: carouselZIndex,
                   }}
                   transition={{
                     type: "spring",
                     stiffness: 100,
                     damping: 25,
                   }}
-                  className={isAllView ? "relative w-full h-full" : "absolute w-full max-w-[450px]"}
+                  className={isAllView || isMobile ? "relative w-full h-full" : "absolute w-[90vw] md:max-w-[450px]"}
                 >
                   <ProjectCard project={project} idx={idx} />
                 </motion.div>
               );
             })}
           </AnimatePresence>
-          
-          {/* Navigation Dots - Only show in carousel mode */}
-          {!isAllView && (
+
+          {/* Navigation Dots - Only show in carousel mode on desktop */}
+          {!isAllView && !isMobile && (
             <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 flex gap-3">
               {PROJECTS.map((_, i) => (
                 <button

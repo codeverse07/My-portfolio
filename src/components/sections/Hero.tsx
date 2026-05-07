@@ -139,31 +139,42 @@ export const Hero = () => {
       ref={containerRef} 
       onMouseMove={handleMouseMove}
       id="home" 
-      className="relative min-h-screen flex items-center justify-center pt-36 bg-transparent z-30"
+      className="relative min-h-screen flex items-center justify-center pt-0 md:pt-36 bg-transparent z-30 snap-start"
     >
       <motion.div style={{ scale: scrollScale, opacity: scrollOpacity }} className="relative z-10 w-full max-w-7xl mx-auto px-6 flex flex-col items-center">
         
-        <motion.div variants={containerVariants} initial="hidden" animate="show" className="text-center mb-6 z-20 pointer-events-none">
+
+
+        <motion.div variants={containerVariants} initial="hidden" animate="show" className="text-center mb-6 z-20 pointer-events-none pt-4">
           <motion.div variants={itemVariants} className="inline-block glass-ultra px-4 py-1 rounded-full border border-neon-lime/30 mb-4">
-            <span className="text-[10px] font-black uppercase tracking-[0.4em] text-neon-lime">AI and Full Stack Developer</span>
+            <span className="text-[10px] font-black uppercase tracking-[0.4em] text-neon-lime">Portfolio_Protocol_v4.0</span>
           </motion.div>
-          <motion.h2 variants={itemVariants} className="text-3xl md:text-4xl font-medium text-white/80 mb-2 font-mono tracking-widest uppercase">
-            <span className="text-neon-lime">{"<"}</span> I'm Sachin <span className="text-neon-lime">{"/>"}</span>
+          <motion.h2 variants={itemVariants} className="text-2xl md:text-4xl font-medium text-white/80 mb-2 font-mono tracking-widest uppercase">
+            <span className="text-neon-lime">{"<"}</span> Sachin Kumar <span className="text-neon-lime">{"/>"}</span>
           </motion.h2>
-          <motion.h1 variants={itemVariants} className="text-5xl md:text-7xl lg:text-[7rem] font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-white/80 to-accent-sky tracking-tighter leading-none filter drop-shadow-[0_0_20px_rgba(14,165,233,0.3)] whitespace-nowrap">
+          <motion.h1 variants={itemVariants} className="text-4xl sm:text-5xl md:text-7xl lg:text-[7rem] font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-white/80 to-accent-sky tracking-tighter leading-[0.9] filter drop-shadow-[0_0_20px_rgba(14,165,233,0.3)] px-2">
             AI & Full Stack
           </motion.h1>
         </motion.div>
 
-        <div className="relative w-full flex justify-center items-center mt-8 md:mt-16">
-          <motion.div initial={{ opacity: 0, x: -50 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 1.2, delay: 0.6 }} className="absolute left-0 md:left-10 top-[20%] hidden md:flex flex-col items-start text-left z-20 pointer-events-none">
-            <div className="flex text-accent-sky mb-2 drop-shadow-[0_0_10px_rgba(14,165,233,0.8)]">
-              {[1, 2, 3, 4, 5].map(star => <Star key={star} size={14} fill="currentColor" />)}
+        <div className="relative w-full flex justify-center items-center mt-4 md:mt-16">
+          {/* Mobile Dash Grid Labels */}
+          <div className="md:hidden absolute inset-0 z-20 pointer-events-none flex flex-col justify-between py-20">
+            <div className="flex justify-between w-full">
+              <div className="glass-ultra p-3 rounded-2xl border border-accent-sky/20 scale-75">
+                <p className="text-[8px] text-accent-sky font-bold uppercase tracking-widest">Sys_Design</p>
+                <div className="flex gap-1 mt-1">
+                  {[1,2,3].map(i => <div key={i} className="w-1 h-1 bg-accent-sky rounded-full" />)}
+                </div>
+              </div>
+              <div className="glass-ultra p-3 rounded-2xl border-neon-lime/20 scale-75">
+                <p className="text-[8px] text-neon-lime font-bold uppercase tracking-widest">ML_Models</p>
+                <div className="flex gap-1 mt-1">
+                  {[1,2,3].map(i => <div key={i} className="w-1 h-1 bg-neon-lime rounded-full" />)}
+                </div>
+              </div>
             </div>
-            <h3 className="text-3xl font-black text-white uppercase tracking-tighter">System</h3>
-            <h3 className="text-3xl font-black text-white uppercase tracking-tighter">Design</h3>
-            <p className="text-[10px] text-neon-lime font-bold tracking-[0.3em] uppercase mt-2">Architecture Expert</p>
-          </motion.div>
+          </div>
 
           {/* 3D R3F Model Section */}
           <div className="relative w-full h-[550px] md:h-[750px] flex items-center justify-center z-10">
@@ -174,9 +185,9 @@ export const Hero = () => {
                   animate={{ opacity: 1, scale: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.5, y: 20 }}
                   style={{ x: bubbleX, y: bubbleY }}
-                  className="absolute top-0 md:top-20 right-10 md:right-[20%] z-50 glass-ultra px-6 py-3 rounded-[2rem] rounded-bl-none border-2 border-neon-lime shadow-[0_0_30px_rgba(205,255,0,0.5)]"
+                  className="absolute top-10 md:top-20 right-4 md:right-[20%] z-50 glass-ultra px-4 py-2 md:px-6 md:py-3 rounded-[2rem] rounded-bl-none border-2 border-neon-lime shadow-[0_0_30px_rgba(205,255,0,0.5)]"
                 >
-                  <p className="text-white font-black text-xl md:text-2xl whitespace-nowrap tracking-wider">Hiee !! 👋🏻</p>
+                  <p className="text-white font-black text-lg md:text-2xl whitespace-nowrap tracking-wider">Hiee !! 👋🏻</p>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -212,12 +223,30 @@ export const Hero = () => {
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(255,107,53,0.1)_0%,_rgba(255,107,53,0)_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                 
                 {/* Glow Effect */}
-                <div className="absolute -inset-1 bg-accent-orange blur-xl opacity-40 group-hover:opacity-70 transition-opacity duration-500" />
+                <div className="absolute -inset-1 bg-accent-orange blur-xl opacity-60 md:opacity-40 md:group-hover:opacity-70 transition-opacity duration-500" />
                 
                 <span className="relative z-10 flex items-center gap-3 text-sm uppercase tracking-[0.2em]">
-                  Let's Collaborate <ArrowUpRight size={20} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
+                  Let's Collaborate <ArrowUpRight size={20} className="md:group-hover:translate-x-1 md:group-hover:-translate-y-1 transition-transform duration-300" />
                 </span>
               </motion.a>
+            </div>
+          </div>
+
+          {/* Mobile Dash Grid Labels Bottom */}
+          <div className="md:hidden absolute inset-0 z-20 pointer-events-none flex flex-col justify-end py-32">
+            <div className="flex justify-between w-full">
+              <div className="glass-ultra p-3 rounded-2xl border border-accent-peach/20 scale-75">
+                <p className="text-[8px] text-accent-peach font-bold uppercase tracking-widest">Full_Stack</p>
+                <div className="flex gap-1 mt-1">
+                  {[1,2,3].map(i => <div key={i} className="w-1 h-1 bg-accent-peach rounded-full" />)}
+                </div>
+              </div>
+              <div className="glass-ultra p-3 rounded-2xl border border-accent-sky/20 scale-75">
+                <p className="text-[8px] text-accent-sky font-bold uppercase tracking-widest">Cloud_Eng</p>
+                <div className="flex gap-1 mt-1">
+                  {[1,2,3].map(i => <div key={i} className="w-1 h-1 bg-accent-sky rounded-full" />)}
+                </div>
+              </div>
             </div>
           </div>
 
@@ -239,6 +268,16 @@ export const Hero = () => {
             <h3 className="text-3xl font-black text-white uppercase tracking-tighter">MERN</h3>
             <h3 className="text-3xl font-black text-white uppercase tracking-tighter">Stack</h3>
             <p className="text-[10px] text-neon-lime font-bold tracking-[0.3em] uppercase mt-2">Full-Stack Dev</p>
+          </motion.div>
+
+          {/* Left Floating Text - System Design */}
+          <motion.div initial={{ opacity: 0, x: -50 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 1.2, delay: 0.8 }} className="absolute left-0 md:left-10 top-[20%] hidden md:flex flex-col items-start text-left z-20 pointer-events-none">
+            <div className="flex text-accent-sky mb-2 drop-shadow-[0_0_10px_rgba(14,165,233,0.8)]">
+              {[1, 2, 3, 4, 5].map(star => <Star key={star} size={14} fill="currentColor" />)}
+            </div>
+            <h3 className="text-3xl font-black text-white uppercase tracking-tighter">System</h3>
+            <h3 className="text-3xl font-black text-white uppercase tracking-tighter">Design</h3>
+            <p className="text-[10px] text-neon-lime font-bold tracking-[0.3em] uppercase mt-2">Architecture v1.0</p>
           </motion.div>
 
           {/* New Left Floating Text - Cloud & DevOps */}

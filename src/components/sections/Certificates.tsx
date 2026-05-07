@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { Download, ExternalLink, Award, X, RotateCcw, RotateCw, Cpu, Brain, MessageSquare, Code2, Target } from "lucide-react";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const CERTIFICATES_DATA = [
   {
@@ -49,7 +49,9 @@ const CERTIFICATES_DATA = [
 
 const CertificateCard = ({ cert, idx, onView }: { cert: typeof CERTIFICATES_DATA[0]; idx: number; onView: () => void }) => {
   const isEven = idx % 2 === 0;
-  const glowShadow = isEven ? 'hover:shadow-[0_0_20px_rgba(205,255,0,0.2)] hover:border-neon-lime/50' : 'hover:shadow-[0_0_20px_rgba(255,127,80,0.2)] hover:border-coral/50';
+  const glowShadow = isEven 
+    ? 'shadow-[0_0_20px_rgba(205,255,0,0.15)] border-neon-lime/30 md:border-white/10 md:shadow-none md:hover:shadow-[0_0_20px_rgba(205,255,0,0.2)] md:hover:border-neon-lime/50' 
+    : 'shadow-[0_0_20px_rgba(255,127,80,0.15)] border-coral/30 md:border-white/10 md:shadow-none md:hover:shadow-[0_0_20px_rgba(255,127,80,0.2)] md:hover:border-coral/50';
 
   return (
     <motion.div
@@ -57,10 +59,10 @@ const CertificateCard = ({ cert, idx, onView }: { cert: typeof CERTIFICATES_DATA
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: idx * 0.1, duration: 0.6 }}
-      className={`glass-ultra rounded-3xl overflow-hidden group flex flex-col transition-all duration-500 border border-white/10 ${glowShadow}`}
+      className={`glass-ultra rounded-3xl overflow-hidden group flex flex-col transition-all duration-500 border ${glowShadow}`}
     >
       <div className="w-full aspect-[4/3] bg-white/5 relative overflow-hidden flex items-center justify-center border-b border-white/10 group-hover:bg-white/10 transition-colors">
-        <div className={`absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-20 transition-opacity duration-500 z-10
+        <div className={`absolute inset-0 bg-gradient-to-br opacity-20 md:opacity-0 md:group-hover:opacity-20 transition-opacity duration-500 z-10
           ${isEven ? 'from-neon-lime to-transparent' : 'from-coral to-transparent'}
         `} />
         
@@ -93,18 +95,21 @@ const CertificateCard = ({ cert, idx, onView }: { cert: typeof CERTIFICATES_DATA
         <div className="flex gap-4">
           <button 
             onClick={onView}
-            className="flex-1 glass-ultra py-3 rounded-xl flex justify-center items-center gap-2 text-xs font-bold uppercase tracking-widest hover:bg-white/10 transition-colors border border-white/10"
+            className="flex-1 glass-ultra py-3 rounded-xl flex justify-center items-center gap-2 text-xs font-bold uppercase tracking-widest hover:bg-white/10 transition-colors border border-white/10 text-white"
           >
             <ExternalLink size={14} /> View
           </button>
           <a 
             href={cert.file} 
             download 
-            className={`flex-1 py-3 rounded-xl flex justify-center items-center gap-2 text-xs font-bold uppercase tracking-widest text-black transition-colors
-              ${isEven ? 'bg-neon-lime hover:bg-white' : 'bg-coral hover:bg-white'}
-            `}
+            style={{ 
+              backgroundColor: isEven ? '#CDFF00' : '#FF7F50', 
+              color: '#000000' 
+            }}
+            className={`flex-1 py-3 rounded-xl flex justify-center items-center gap-2 text-xs font-black uppercase tracking-widest transition-colors shadow-lg`}
           >
-            <Download size={14} /> DL
+            <Download size={14} color="#000000" /> 
+            <span style={{ color: '#000000', fontWeight: 900 }}>DL</span>
           </a>
         </div>
       </div>
@@ -114,14 +119,21 @@ const CertificateCard = ({ cert, idx, onView }: { cert: typeof CERTIFICATES_DATA
 
 export const Certificates = () => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const handleView = (cert: typeof CERTIFICATES_DATA[0]) => {
-    const url = `/view-certificate?file=${encodeURIComponent(cert.file)}&title=${encodeURIComponent(cert.title)}`;
-    window.open(url, '_blank');
+    window.open(cert.file, "_blank");
   };
 
   return (
-    <section id="certificates" className="py-32 relative bg-transparent z-20">
+    <section id="certificates" className="py-24 md:py-32 relative bg-transparent z-20 snap-start">
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         
         <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
@@ -141,7 +153,7 @@ export const Certificates = () => {
               transition={{ delay: 0.2 }}
               className="text-white/50 text-lg leading-relaxed font-sans"
             >
-              Official certifications validating specialized technical expertise. Every document opens in a dedicated vertical viewer for maximum clarity.
+              Official certifications validating specialized technical expertise.
             </motion.p>
           </div>
         </div>
@@ -149,15 +161,15 @@ export const Certificates = () => {
         <div className="relative">
           <motion.div 
             layout 
-            className={isExpanded ? "grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8" : "relative flex justify-center items-center h-[550px] w-full"}
+            className={isExpanded || isMobile ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8" : "relative flex justify-center items-center h-[550px] w-full"}
           >
             {CERTIFICATES_DATA.map((cert, idx) => (
               <motion.div
                 layout
                 key={cert.title}
-                onClick={() => !isExpanded && setIsExpanded(true)}
+                onClick={() => !isExpanded && !isMobile && setIsExpanded(true)}
                 initial={false}
-                animate={!isExpanded ? {
+                animate={!isExpanded && !isMobile ? {
                   rotateZ: (idx - 1) * 4,
                   x: (idx - 1) * 20,
                   y: idx * -10,
@@ -171,7 +183,7 @@ export const Certificates = () => {
                   zIndex: 1
                 }}
                 transition={{ type: "spring", stiffness: 100, damping: 25 }}
-                className={isExpanded ? "w-full" : "absolute w-full max-w-[350px] cursor-pointer"}
+                className={isExpanded || isMobile ? "w-full" : "absolute w-[85vw] max-w-[350px] cursor-pointer"}
               >
                 {!isExpanded && idx === 0 && (
                   <div className="absolute inset-0 z-50 flex items-center justify-center bg-black/40 rounded-3xl opacity-0 hover:opacity-100 transition-opacity backdrop-blur-sm pointer-events-none">
@@ -182,15 +194,15 @@ export const Certificates = () => {
                 <CertificateCard 
                   cert={cert} 
                   idx={idx} 
-                  onView={() => isExpanded && handleView(cert)} 
+                  onView={() => (isExpanded || isMobile) && handleView(cert)} 
                 />
                 
-                {!isExpanded && <div className="absolute inset-0 z-40" />}
+                {!isExpanded && !isMobile && <div className="absolute inset-0 z-40" />}
               </motion.div>
             ))}
           </motion.div>
 
-          {isExpanded && (
+          {isExpanded && !isMobile && (
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex justify-center mt-12">
               <button 
                 onClick={() => setIsExpanded(false)}

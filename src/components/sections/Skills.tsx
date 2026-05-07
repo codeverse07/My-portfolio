@@ -89,21 +89,23 @@ const TiltCard = ({ category, idx }: { category: typeof SERVICES_DATA[0]; idx: n
       className="relative w-full perspective-1000"
     >
       <div 
-        className={`glass-ultra p-8 rounded-[2rem] transition-all duration-700 group h-full flex flex-col justify-between hover:scale-[1.02]
-          ${idx % 2 === 0 ? 'hover:border-neon-lime shadow-[0_0_20px_rgba(205,255,0,0.1)] hover:shadow-[0_0_30px_rgba(205,255,0,0.2)]' : 'hover:border-coral shadow-[0_0_20px_rgba(255,127,80,0.1)] hover:shadow-[0_0_30px_rgba(255,127,80,0.2)]'}
+        className={`glass-ultra p-6 md:p-8 rounded-[2rem] transition-all duration-700 group h-full flex flex-col justify-between md:hover:scale-[1.02] border
+          ${idx % 2 === 0 
+            ? 'shadow-[0_0_20px_rgba(205,255,0,0.1)] border-neon-lime/30 md:border-transparent md:shadow-none md:hover:border-neon-lime md:hover:shadow-[0_0_30px_rgba(205,255,0,0.2)]' 
+            : 'shadow-[0_0_20px_rgba(255,127,80,0.1)] border-coral/30 md:border-transparent md:shadow-none md:hover:border-coral md:hover:shadow-[0_0_30px_rgba(255,127,80,0.2)]'}
         `}
         style={{ transform: "translateZ(30px)" }}
       >
         <div className="relative z-10">
           <div 
-            className="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center mb-8 border border-white/10 group-hover:scale-110 transition-transform duration-500 backdrop-blur-md"
+            className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-white/5 flex items-center justify-center mb-6 md:mb-8 border border-white/10 group-hover:scale-110 transition-transform duration-500 backdrop-blur-md"
             style={{ transform: "translateZ(50px)" }}
           >
-            {React.cloneElement(category.icon as React.ReactElement, { className: `w-8 h-8 ${idx % 2 === 0 ? 'text-neon-lime' : 'text-coral'}` })}
+            {React.cloneElement(category.icon as React.ReactElement, { className: `w-6 h-6 md:w-8 md:h-8 ${idx % 2 === 0 ? 'text-neon-lime' : 'text-coral'}` })}
           </div>
           
           <h3 
-            className="text-2xl font-bold mb-6 text-white tracking-wide uppercase"
+            className="text-xl md:text-2xl font-bold mb-4 md:mb-6 text-white tracking-wide uppercase"
             style={{ transform: "translateZ(40px)" }}
           >
             {category.title}
@@ -146,7 +148,7 @@ export const Skills = () => {
   const smoothOpacity = useSpring(useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0.5, 1, 1, 1]), { stiffness: 100, damping: 30 });
 
   return (
-    <section ref={containerRef} id="skills" className="py-32 relative overflow-hidden bg-transparent z-20">
+    <section ref={containerRef} id="skills" className="py-24 md:py-32 relative overflow-hidden bg-transparent z-20 snap-start">
       <motion.div style={{ scale: smoothScale, opacity: smoothOpacity }} className="max-w-7xl mx-auto px-6 relative z-10">
         
         <div className="flex flex-col md:flex-row justify-between items-end mb-24 gap-8">

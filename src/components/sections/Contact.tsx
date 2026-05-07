@@ -73,7 +73,7 @@ export const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-32 relative bg-transparent z-20 overflow-hidden">
+    <section id="contact" className="py-24 md:py-32 relative bg-transparent z-20 overflow-hidden snap-start">
       <div className="max-w-7xl mx-auto px-6 relative z-10">
 
         <div className="flex flex-col lg:flex-row gap-16 lg:gap-24 items-start">
@@ -254,15 +254,18 @@ export const Contact = () => {
                   whileTap={{ scale: 0.98 }}
                   disabled={isSubmitting}
                   type="submit"
-                  className="w-full bg-neon-lime text-black py-5 rounded-2xl font-black uppercase tracking-[0.3em] flex justify-center items-center gap-3 hover:bg-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_0_25px_rgba(205,255,0,0.4)]"
+                  style={{ backgroundColor: '#CDFF00', color: '#000000' }}
+                  className="w-full py-5 rounded-2xl font-black uppercase tracking-[0.3em] flex justify-center items-center gap-3 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_0_30px_rgba(205,255,0,0.6)]"
                 >
                   {isSubmitting ? (
                     <>
-                      <Loader2 size={20} className="animate-spin" /> Transmitting...
+                      <Loader2 size={20} className="animate-spin" /> 
+                      <span style={{ color: '#000000', fontWeight: 900 }}>TRANSMITTING...</span>
                     </>
                   ) : (
                     <>
-                      <Send size={20} /> Deploy Message
+                      <Send size={20} color="#000000" /> 
+                      <span style={{ color: '#000000', fontWeight: 900 }}>DEPLOY MESSAGE</span>
                     </>
                   )}
                 </motion.button>
@@ -303,10 +306,17 @@ export const Contact = () => {
           transition={{ delay: 0.5, duration: 1 }}
           className="mt-24 text-center group cursor-default select-none"
         >
-          <div className="font-dancing-script text-4xl md:text-5xl text-white/30 transition-all duration-700">
-            Designed <span className="group-hover:text-accent-orange transition-all duration-700 group-hover:drop-shadow-[0_0_15px_rgba(255,107,53,0.6)]">with <motion.span animate={{ scale: [1, 1.2, 1] }} transition={{ repeat: Infinity, duration: 2 }} className="inline-block">love 🥰</motion.span></span> from <span className="text-white/40 group-hover:text-accent-sky transition-all duration-700 group-hover:drop-shadow-[0_0_15px_rgba(14,165,233,0.6)]">Sachin !!</span>
+          <div className="flex flex-col md:flex-row items-center justify-center gap-3 md:gap-6 transition-all duration-700">
+            <span className="font-outfit text-sm md:text-lg uppercase tracking-[0.4em] text-white/40">Designed</span>
+            <span className="font-dancing-script text-3xl md:text-5xl text-accent-orange drop-shadow-[0_0_15px_rgba(255,107,53,0.6)] md:text-white/30 md:drop-shadow-none md:group-hover:text-accent-orange md:group-hover:drop-shadow-[0_0_20px_rgba(255,107,53,0.8)] transition-all duration-700">
+              with <motion.span animate={{ scale: [1, 1.2, 1] }} transition={{ repeat: Infinity, duration: 2 }} className="inline-block">love 🥰</motion.span>
+            </span>
+            <span className="font-outfit text-sm md:text-lg uppercase tracking-[0.4em] text-white/40">from</span>
+            <span className="font-dancing-script text-4xl md:text-6xl text-accent-sky drop-shadow-[0_0_15px_rgba(14,165,233,0.6)] md:text-white/50 md:drop-shadow-none md:group-hover:text-accent-sky md:group-hover:drop-shadow-[0_0_25px_rgba(14,165,233,0.8)] transition-all duration-700">
+              Sachin !!
+            </span>
           </div>
-          <div className="h-[1px] w-24 bg-gradient-to-r from-transparent via-neon-lime/20 to-transparent mx-auto mt-4 group-hover:via-neon-lime/50 transition-all duration-700" />
+          <div className="h-[1px] w-32 bg-gradient-to-r from-transparent via-accent-sky/50 to-transparent mx-auto mt-6 md:via-white/10 md:group-hover:via-accent-sky/50 transition-all duration-700 shadow-[0_0_15px_rgba(14,165,233,0.3)]" />
         </motion.div>
       </div>
     </section>
